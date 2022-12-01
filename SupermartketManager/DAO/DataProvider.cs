@@ -33,7 +33,7 @@ namespace SupermartketManager.DAO
 
         public static DataTable ExecuteQuery(string query, ref string errorMessage, object[] parameterValues = null)
         {
-            ConnectionString = $@"Data Source=.;Initial Catalog=SupermarketManagementTEST; User ID={Username}; Password={Password}";
+            ConnectionString = $@"Data Source=.;Initial Catalog=SupermarketManagement; User ID={Username}; Password={Password}";
             DataTable dataTable = new DataTable();
             try
             {
@@ -65,7 +65,7 @@ namespace SupermartketManager.DAO
 
         public static int ExecuteNonQuery(string query, ref string errorMessage, object[] parameterValues = null)
         {
-            ConnectionString = $@"Data Source=.;Initial Catalog=SupermarketManagementTEST; User ID={Username}; Password={Password}";
+            ConnectionString = $@"Data Source=.;Initial Catalog=SupermarketManagement; User ID={Username}; Password={Password}";
             int rowsAffected = 0;
             try
             {
@@ -96,7 +96,7 @@ namespace SupermartketManager.DAO
 
         public static object ExecuteScalar(string query, ref string errorMessage, object[] parameterValues = null)
         {
-            ConnectionString = $@"Data Source=.;Initial Catalog=SupermarketManagementTEST; User ID={Username}; Password={Password}";
+            ConnectionString = $@"Data Source=.;Initial Catalog=SupermarketManagement; User ID={Username}; Password={Password}";
             object data = null;
             try
             {
