@@ -79,6 +79,7 @@ namespace SupermartketManager.GUI
                 }
                 cbCategory.DisplayMember = "Text";
                 cbCategory.ValueMember = "Value";
+                cbCategory.DataSource = null;
                 cbCategory.DataSource = categoriesItem;
 
                 // Warehouse combobox
@@ -92,6 +93,7 @@ namespace SupermartketManager.GUI
                 }
                 cbWarehouse.DisplayMember = "Text";
                 cbWarehouse.ValueMember = "Value";
+                cbWarehouse.DataSource = null;
                 cbWarehouse.DataSource = warehousesItem;
                 // End load data for combobox    --------
 

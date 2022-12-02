@@ -35,14 +35,10 @@ namespace SupermartketManager.GUI
                 dgvCompanies.RowHeadersVisible = false;
                 int width = dgvCompanies.Width;
                 dgvCompanies.Columns[0].Visible = false; // company_id
-                dgvCompanies.Columns[1].Width = dgvCompanies.Width / 10 * 4; // name
+                dgvCompanies.Columns[1].Width = dgvCompanies.Width / 2; // name
                 dgvCompanies.Columns[1].HeaderText = "Tên Công Ty";
-                dgvCompanies.Columns[2].Width = dgvCompanies.Width / 5; // address
-                dgvCompanies.Columns[2].HeaderText = "Địa chỉ";
-                dgvCompanies.Columns[3].Width = dgvCompanies.Width / 5; // phone
-                dgvCompanies.Columns[3].HeaderText = "Số điện thoại";
-                dgvCompanies.Columns[4].Width = dgvCompanies.Width / 5; // TotalImport
-                dgvCompanies.Columns[4].HeaderText = "Tổng số lượng hàng cung cấp";
+                dgvCompanies.Columns[2].Width = dgvCompanies.Width / 2; // address
+                dgvCompanies.Columns[2].HeaderText = "Tổng số lượng hàng cung cấp";
             }
             catch
             {

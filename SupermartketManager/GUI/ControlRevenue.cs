@@ -156,7 +156,7 @@ namespace SupermartketManager.GUI
                 dgvStatistic.Columns[1].Width = (int)(width * 0.2);
                 dgvStatistic.Columns[1].HeaderText = "Tên NV";
                 dgvStatistic.Columns[2].Width = (int)(width * 0.1);
-                dgvStatistic.Columns[2].HeaderText = "Mã KH";
+                dgvStatistic.Columns[2].HeaderText = "SĐT KH";
                 dgvStatistic.Columns[3].Width = (int)(width * 0.2);
                 dgvStatistic.Columns[3].HeaderText = "Ngày tạo";
                 dgvStatistic.Columns[4].Width = (int)(width * 0.2);

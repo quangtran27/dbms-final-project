@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.controlRevenue1 = new SupermartketManager.GUI.ControlRevenue();
             this.controlViewBill1 = new SupermartketManager.GUI.ControlViewBill();
             this.controlAccount2 = new SupermartketManager.GUI.ControlAccount();
             this.controlProductSoldByMonth1 = new SupermartketManager.GUI.ControlProductSoldByMonth();
@@ -63,18 +64,16 @@
             this.quảnLíTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mniLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.controlRevenue1 = new SupermartketManager.GUI.ControlRevenue();
+            this.kháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.controlCustomer1 = new SupermartketManager.GUI.ControlCustomer();
+            this.groupInfo2 = new SupermartketManager.GUI.GroupInfo();
             this.panel2.SuspendLayout();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.controlRevenue1);
-            this.panel2.Controls.Add(this.controlViewBill1);
-            this.panel2.Controls.Add(this.controlAccount2);
-            this.panel2.Controls.Add(this.controlProductSoldByMonth1);
-            this.panel2.Controls.Add(this.controlTopCompany1);
+            this.panel2.Controls.Add(this.groupInfo2);
             this.panel2.Controls.Add(this.controlCompany1);
             this.panel2.Controls.Add(this.groupInfo1);
             this.panel2.Controls.Add(this.lbAccountInfo);
@@ -87,10 +86,25 @@
             this.panel2.Controls.Add(this.ucPosition1);
             this.panel2.Controls.Add(this.ucCategory1);
             this.panel2.Controls.Add(this.menu);
+            this.panel2.Controls.Add(this.controlCustomer1);
+            this.panel2.Controls.Add(this.controlRevenue1);
+            this.panel2.Controls.Add(this.controlViewBill1);
+            this.panel2.Controls.Add(this.controlAccount2);
+            this.panel2.Controls.Add(this.controlProductSoldByMonth1);
+            this.panel2.Controls.Add(this.controlTopCompany1);
             this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1135, 661);
             this.panel2.TabIndex = 3;
+            // 
+            // controlRevenue1
+            // 
+            this.controlRevenue1.Font = new System.Drawing.Font("Nunito SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.controlRevenue1.Location = new System.Drawing.Point(0, 88);
+            this.controlRevenue1.Name = "controlRevenue1";
+            this.controlRevenue1.Size = new System.Drawing.Size(1120, 558);
+            this.controlRevenue1.TabIndex = 17;
+            this.controlRevenue1.Load += new System.EventHandler(this.controlRevenue1_Load);
             // 
             // controlViewBill1
             // 
@@ -135,6 +149,7 @@
             this.controlCompany1.Name = "controlCompany1";
             this.controlCompany1.Size = new System.Drawing.Size(1120, 558);
             this.controlCompany1.TabIndex = 10;
+            this.controlCompany1.Load += new System.EventHandler(this.controlCompany1_Load);
             // 
             // groupInfo1
             // 
@@ -258,6 +273,7 @@
             this.côngTyToolStripMenuItem,
             this.chứcVụToolStripMenuItem,
             this.nhânViênToolStripMenuItem,
+            this.kháchHàngToolStripMenuItem,
             this.hóaĐơnToolStripMenuItem});
             this.mniManager.Name = "mniManager";
             this.mniManager.Size = new System.Drawing.Size(99, 32);
@@ -368,13 +384,28 @@
             this.mniLogout.Text = "Đăng xuất";
             this.mniLogout.Click += new System.EventHandler(this.mniLogout_Click);
             // 
-            // controlRevenue1
+            // kháchHàngToolStripMenuItem
             // 
-            this.controlRevenue1.Font = new System.Drawing.Font("Nunito SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.controlRevenue1.Location = new System.Drawing.Point(0, 88);
-            this.controlRevenue1.Name = "controlRevenue1";
-            this.controlRevenue1.Size = new System.Drawing.Size(1120, 558);
-            this.controlRevenue1.TabIndex = 17;
+            this.kháchHàngToolStripMenuItem.Name = "kháchHàngToolStripMenuItem";
+            this.kháchHàngToolStripMenuItem.Size = new System.Drawing.Size(244, 32);
+            this.kháchHàngToolStripMenuItem.Text = "Khách hàng";
+            this.kháchHàngToolStripMenuItem.Click += new System.EventHandler(this.kháchHàngToolStripMenuItem_Click);
+            // 
+            // controlCustomer1
+            // 
+            this.controlCustomer1.Font = new System.Drawing.Font("Nunito SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.controlCustomer1.Location = new System.Drawing.Point(5, 88);
+            this.controlCustomer1.Name = "controlCustomer1";
+            this.controlCustomer1.Size = new System.Drawing.Size(1120, 558);
+            this.controlCustomer1.TabIndex = 18;
+            // 
+            // groupInfo2
+            // 
+            this.groupInfo2.Font = new System.Drawing.Font("Nunito SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupInfo2.Location = new System.Drawing.Point(0, 69);
+            this.groupInfo2.Name = "groupInfo2";
+            this.groupInfo2.Size = new System.Drawing.Size(1120, 558);
+            this.groupInfo2.TabIndex = 19;
             // 
             // FormMain
             // 
@@ -435,5 +466,8 @@
         private System.Windows.Forms.ToolStripMenuItem hóaĐơnToolStripMenuItem;
         private ControlViewBill controlViewBill1;
         private ControlRevenue controlRevenue1;
+        private System.Windows.Forms.ToolStripMenuItem kháchHàngToolStripMenuItem;
+        private ControlCustomer controlCustomer1;
+        private GroupInfo groupInfo2;
     }
 }

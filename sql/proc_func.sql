@@ -82,8 +82,7 @@ GO
 
 ----------------------------- Tài khoản -----------------------------
 -- Thêm tài khoản
--- Thêm tài khoản
-CREATE OR ALTER PROC [dbo].[proc_Account_Add]
+CREATE PROC [dbo].[proc_Account_Add]
 	@username VARCHAR(100), 
 	@password VARCHAR(100),
 	@employee_id INT
@@ -97,7 +96,7 @@ BEGIN
 	DECLARE @createLogin NVARCHAR (400)
 	DECLARE @createUser NVARCHAR (400)
 
-	SET @createLogin = 'CREATE LOGIN ' + @username + ' WITH PASSWORD = ''' + @password + ''', DEFAULT_DATABASE = SupermarketManagementTEST, CHECK_POLICY = OFF, CHECK_EXPIRATION = OFF;'
+	SET @createLogin = 'CREATE LOGIN ' + @username + ' WITH PASSWORD = ''' + @password + ''', DEFAULT_DATABASE = SupermarketManagement, CHECK_POLICY = OFF, CHECK_EXPIRATION = OFF;'
 	SET @createUser = 'CREATE USER ' + @username + ' FOR LOGIN ' + @username
 	EXEC (@createLogin)
 	EXEC (@createUser)
@@ -114,236 +113,19 @@ BEGIN
 	-- Phân quyền
 	IF (@roleID = 1)	-- Giám đốc
 	BEGIN
-		SET @statement = 'GRANT EXEC, CONTROL TO ' + @username
-		EXEC (@statement)
 		EXEC master ..sp_addsrvrolemember @username, N'sysadmin'
 	END
 	ELSE IF (@roleID = 2) -- quản lý
 	BEGIN
-		-- Cấp quyền vào các bảng
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Account] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[Position] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[Category] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, UPDATE ON [dbo].[Product] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE ON [dbo].[Bill] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE ON [dbo].[BillInfo] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Customer] TO ' + @username
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Employee] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Import] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Company] TO '+ @username
-		EXEC (@statement)
-
-		-- Cấp quyền exec func, proc
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Account_GetAccount] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Category_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Product_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Customer_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_Update] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_Delete] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Bill_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[func_Bill_GetNewestBillId] TO '+ @username
-		EXEC (@statement)
-		
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_BillInfo_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Bill_RoundTotal] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_AccumulatePoints] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Import_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Import_Delete] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Import_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Product_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Company_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Company_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Company_Update] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Company_Delete] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Warehouse_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Warehouse_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Warehouse_Update] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Warehouse_Delete] TO '+ @username
-		EXEC (@statement)
+		EXEC sp_addrolemember 'db_Manager' , @username
 	END
 	ELSE IF (@roleID = 3) -- thu ngân
 	BEGIN
-		-- Cấp quyền vào các bảng
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Account] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[Position] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[Category] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, UPDATE ON [dbo].[Product] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE ON [dbo].[Bill] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE ON [dbo].[BillInfo] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Customer] TO ' + @username
-		EXEC (@statement)
-
-		-- Cấp quyền exec proc func, proc
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Account_GetAccount] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Category_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Product_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Customer_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_Update] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_Delete] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Bill_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[func_Bill_GetNewestBillId] TO '+ @username
-		EXEC (@statement)
-		
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_BillInfo_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Bill_RoundTotal] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Customer_AccumulatePoints] TO '+ @username
-		EXEC (@statement)
+		EXEC sp_addrolemember 'db_Cashier ' , @username
 	END
 	ELSE IF (@roleID = 4)	-- Thủ kho
 	BEGIN
-		-- Cấp quyền vào các bảng
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Account] TO ' + @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[Position] TO '+ @username
-		exec (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Employee] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Import] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Company] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Warehouse] TO '+ @username
-		EXEC (@statement)
-		 
-		-- Cấp quyền exec proc, SELECT func
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Account_GetAccount] TO '+ @username
-		EXEC (@statement)	
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Import_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Import_Delete] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Import_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Product_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Company_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Company_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Company_Update] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Company_Delete] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT SELECT ON [dbo].[func_Warehouse_GetAll] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Warehouse_Add] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Warehouse_Update] TO '+ @username
-		EXEC (@statement)
-
-		SET @statement = 'GRANT EXEC ON [dbo].[proc_Warehouse_Delete] TO '+ @username
-		EXEC (@statement)
+		EXEC sp_addrolemember 'db_WarehouseKeeper' , @username
 	END
 END
 GO
@@ -580,7 +362,8 @@ AS
 			W.name warehouse_name
 		FROM Product P, Category C, Warehouse W
 		WHERE P.category_id = C.category_id AND 
-				P.warehouse_id = W.warehouse_id
+				P.warehouse_id = W.warehouse_id AND
+				P.available = 1
 	)
 GO
 
@@ -679,10 +462,18 @@ GO
 -- Thêm hóa đơn
 CREATE PROC [dbo].[proc_Bill_Add]
 	@employee_id INT,
-	@customer_phone VARCHAR(10)
-	AS 
-      INSERT INTO Bill (employee_id, customer_phone, created, discount, total, available)
-      VALUES (@employee_id, @customer_phone, GETDATE(), 0, 0, 1)
+	@customer_phone VARCHAR(10),
+	@discount INT
+AS
+BEGIN
+	DECLARE @phone VARCHAR(10)
+	IF @customer_phone = ''
+		SET @phone = NULL
+	ELSE
+		SET @phone = @customer_phone
+    INSERT INTO Bill (employee_id, customer_phone, created, discount, total, available)
+    VALUES (@employee_id, @phone, GETDATE(), @discount, -@discount, 1)
+END
 GO
 
 -- Xóa hóa đơn
@@ -736,6 +527,17 @@ CREATE PROC [dbo].[proc_BillInfo_Add]
 		VALUES (@bill_id, @product_id, @quantity, @price)
 GO
 
+-- Tính tổng tiền của hóa đơn chi tiết
+CREATE FUNCTION [dbo].[func_BillInfo_CalcTotal](@quantity INT, @price INT)
+RETURNS INT
+AS
+BEGIN 
+	DECLARE @total INT
+	SET @total = @quantity * @price
+	RETURN @total
+END
+GO
+
 -- Tích điểm cho khách hàng khi mua hàng thành công
 CREATE PROC [dbo].[proc_Customer_AccumulatePoints]
 	@customer_phone VARCHAR(10) , 
@@ -765,13 +567,6 @@ GO
 
 
 
--- Tìm doanh thu theo ngày/tháng/năm
-CREATE FUNCTION Bill_Find_ByDate(@Created DATE)
-RETURNS TABLE
-AS RETURN
-	SELECT * FROM Bill
-	WHERE Bill.created= @Created 
-GO
 
 -- Thống kê doanh thu theo ngày
 CREATE FUNCTION [dbo].[func_Statistic_Sale_ByDate] ( @Date int, @Month int, @Year int)
@@ -782,6 +577,14 @@ AS RETURN
 		(SELECT *, MONTH(Bill.created) AS THANG,Year(Bill.created) AS NAM, DAY(Bill.created) AS NGAY FROM Bill 
 		where MONTH(Bill.created)=@Month and DAY(Bill.created)=@Date and Year(Bill.created)=@Year) AS DATECOLUM
 	GROUP BY NGAY,THANG,NAM
+GO
+--Hiển thị tất cả hóa đơn theo ngày
+CREATE FUNCTION [dbo].[func_Bill_Find_ByDateMonthYear](@Date int, @Month int, @Year int)
+RETURNS TABLE
+AS RETURN
+	SELECT B.bill_id, E.name, B.customer_phone, B.created, B.discount, B.total
+	FROM Bill B JOIN Employee E ON	B.employee_id = E.employee_id
+	WHERE MONTH(B.created)=@Month and DAY(B.created)=@Date and Year(B.created)=@Year
 GO
 
 CREATE FUNCTION [dbo].[func_Statistic_Sale_ByMonth]()
@@ -802,7 +605,6 @@ FROM
 	(SELECT *, Year(Bill.created) AS Year FROM Bill) AS YearTable
 	GROUP BY Year)
 GO
-
 
 -- Tìm Khách hàng chi tiêu nhiều nhất tháng
 Create FUNCTION [dbo].[func_Customer_FindMaxSpending](@Month INT, @Year INT)
@@ -856,3 +658,15 @@ RETURN
 		) AS Q
 	)
 GO
+
+-- View Hóa Đơn
+Create or alter View view_BILL_BILLINFO
+AS
+	SELECT dbo.Bill.bill_id, dbo.Bill.created AS Ngaytao, dbo.Employee.name AS TenNhanVien, dbo.Bill.customer_phone AS SDTKhachHang, dbo.Bill.discount AS GiamGia, dbo.Product.name AS TenSanPham, dbo.BillInfo.quantity AS SoLuong, dbo.BillInfo.price As DonGia
+	FROM  dbo.Bill INNER JOIN
+		dbo.BillInfo ON dbo.Bill.bill_id = dbo.BillInfo.bill_id INNER JOIN
+		dbo.Product ON dbo.Product.product_id = dbo.BillInfo.product_id INNER JOIN
+		dbo.Employee ON Employee.employee_id = Bill.employee_id
+GO
+
+-- 

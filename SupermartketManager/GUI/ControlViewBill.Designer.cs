@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.panel1.SuspendLayout();
@@ -65,9 +66,9 @@
             this.label1.Location = new System.Drawing.Point(44, 13);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(287, 46);
+            this.label1.Size = new System.Drawing.Size(492, 46);
             this.label1.TabIndex = 43;
-            this.label1.Text = "Quản lý Hóa Đơn";
+            this.label1.Text = "Xem thông tin chi tiết hóa đơn";
             // 
             // txtId
             // 
@@ -82,6 +83,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btn);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dgvBill);
             this.panel1.Location = new System.Drawing.Point(19, 53);
@@ -89,6 +91,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1081, 491);
             this.panel1.TabIndex = 41;
+            // 
+            // btn
+            // 
+            this.btn.Location = new System.Drawing.Point(757, 23);
+            this.btn.Name = "btn";
+            this.btn.Size = new System.Drawing.Size(263, 36);
+            this.btn.TabIndex = 44;
+            this.btn.Text = "Reload";
+            this.btn.UseVisualStyleBackColor = true;
+            this.btn.Click += new System.EventHandler(this.btn_Click);
             // 
             // btnReload
             // 
@@ -108,6 +120,7 @@
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnReload);
+            this.Font = new System.Drawing.Font("Nunito SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ControlViewBill";
             this.Size = new System.Drawing.Size(1120, 558);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
@@ -125,5 +138,6 @@
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnReload;
+        private System.Windows.Forms.Button btn;
     }
 }

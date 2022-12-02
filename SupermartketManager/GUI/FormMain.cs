@@ -131,5 +131,20 @@ namespace SupermartketManager.GUI
         {
 
         }
+
+        private void controlRevenue1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void controlCompany1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controlCustomer1.BringToFront();
+        }
     }
 }

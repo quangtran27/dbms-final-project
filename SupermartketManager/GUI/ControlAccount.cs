@@ -69,6 +69,7 @@ namespace SupermartketManager.GUI
                 }
                 cbEmployee.DisplayMember = "Text";
                 cbEmployee.ValueMember = "Value";
+                cbEmployee.DataSource = null;
                 cbEmployee.DataSource = employeeItems;
 
                 // Load data in datagridview

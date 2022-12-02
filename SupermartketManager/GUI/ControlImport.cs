@@ -100,7 +100,7 @@ namespace SupermartketManager.GUI
                 dgvImports.Columns[1].HeaderText = "Ngày nhập";
                 dgvImports.Columns[2].Visible = false; // product_id
                 dgvImports.Columns[3].Width = (int)(width * 0.2); // product_name
-                dgvImports.Columns[4].HeaderText = "Tên Hàng";
+                dgvImports.Columns[3].HeaderText = "Tên Hàng";
                 dgvImports.Columns[4].Visible = false; // company_id
                 dgvImports.Columns[5].Width = (int)(width * 0.2); // company_name
                 dgvImports.Columns[5].HeaderText = "Tên CTy";

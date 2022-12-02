@@ -74,10 +74,11 @@ BEGIN
 END
 GO
 
+
 -- Tự động giảm số lượng sản phẩm khi xóa nhập hàng
 CREATE TRIGGER tr_Import_Delete
 ON Import
-AFTER DELETE
+AFTER UPDATE
 AS
 BEGIN
 	DECLARE @product_id INT,
